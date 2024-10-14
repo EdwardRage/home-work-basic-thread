@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MultithreadingSiteVisitor {
     private final SiteVisitCounter siteVisitCounter;
-    private long startTime;
+    private double startTime;
 
     private List<Thread> threads = new ArrayList<>();
 
@@ -32,8 +32,7 @@ public class MultithreadingSiteVisitor {
     }
 
     //должно возвращаться количество секунд
-    public long getTotalTimeOfHandling() {
-        //Возвращает общее время обработки всех потоков в секундах
-        return (System.currentTimeMillis() - startTime) /*/ 1000*/;
+    public double getTotalTimeOfHandling() {
+        return (System.currentTimeMillis() - startTime) / 1000;
     }
 }
