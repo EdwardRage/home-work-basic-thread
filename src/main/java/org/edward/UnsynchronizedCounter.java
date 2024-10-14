@@ -22,15 +22,6 @@ public class UnsynchronizedCounter extends Thread implements SiteVisitCounter {
     @Override
     public void run() {
         incrementVisitCount();
-        /*try {
-            *//*for (int i = 0; i < 1_000_000; i++) {
-                incrementVisitCount();
-            }
-            System.out.println("Result count = " + getVisitCount());
-            sleep(100L);*//*
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 }
 
