@@ -1,13 +1,14 @@
 package org.edward;
 
-public class VolatileCounter extends Thread implements SiteVisitCounter  {
+import java.util.concurrent.atomic.AtomicInteger;
 
-    private volatile int count = 0;
+public class AtomicIntegerCounter extends Thread implements SiteVisitCounter {
+    private AtomicInteger count = new AtomicInteger();
 
     @Override
     public void incrementVisitCount() {
         try {
-            count++;
+            count.getAndIncrement();
             sleep(100L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -16,7 +17,7 @@ public class VolatileCounter extends Thread implements SiteVisitCounter  {
 
     @Override
     public int getVisitCount() {
-        return count;
+        return count.get();
     }
 
     @Override

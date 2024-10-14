@@ -1,16 +1,21 @@
 package org.edward;
 
-public class UnsynchronizedCounter extends Thread implements SiteVisitCounter {
+import java.util.concurrent.locks.ReentrantLock;
 
+public class ReentrantLockCounter extends Thread implements SiteVisitCounter {
     private int count = 0;
+    private ReentrantLock lock = new ReentrantLock();
 
     @Override
     public void incrementVisitCount() {
+        lock.lock();
         try {
-            Thread.sleep(100L);
             count++;
+            sleep(100L);
         } catch (InterruptedException e) {
-            System.out.println(getName() + " interrupted");
+            throw new RuntimeException(e);
+        } finally {
+            lock.unlock();
         }
     }
 
@@ -24,4 +29,3 @@ public class UnsynchronizedCounter extends Thread implements SiteVisitCounter {
         incrementVisitCount();
     }
 }
-
